@@ -313,37 +313,45 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
   }
 
   // ── GOOGLE SHEETS SYNC ────────────────────────────────────────
+  let isSaving = false;
+
   async function syncFromSheets() {
-    if (!SCRIPT_URL) return;
-    setSyncStatus('loading', 'Sincronizando...');
+    if (!SCRIPT_URL || isSaving) return;
+    setSyncStatus("loading", "Sincronizando...");
     try {
-      const resp = await fetch(SCRIPT_URL + '?t=' + Date.now());
+      const resp = await fetch(SCRIPT_URL + "?t=" + Date.now());
       const data = await resp.json();
-      events = data.filter(r => r.id && r.date && r.title);
-      render();
-      const t = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-      setSyncStatus('ok', 'Sincronizado às ' + t);
+      const fresh = data.filter(r => r.id && r.date && r.title);
+      if (fresh.length >= events.length) {
+        events = fresh;
+        render();
+      }
+      const t = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+      setSyncStatus("ok", "Sincronizado às " + t);
     } catch(e) {
-      setSyncStatus('error', 'Erro ao sincronizar — clique em Atualizar');
+      setSyncStatus("error", "Erro ao sincronizar — clique em Atualizar");
     }
   }
 
   async function persistToSheets() {
     if (!SCRIPT_URL) return;
+    isSaving = true;
     setSyncStatus("loading", "Salvando...");
     try {
-      const encoded = encodeURIComponent(JSON.stringify(events));
+      const snapshot = JSON.stringify(events);
+      const encoded = encodeURIComponent(snapshot);
       const url = SCRIPT_URL + "?action=save&data=" + encoded;
       await fetch(url, { mode: "no-cors" });
-      setTimeout(syncFromSheets, 2500);
       const t = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
       setSyncStatus("ok", "Salvo às " + t);
+      setTimeout(() => { isSaving = false; }, 5000);
     } catch(e) {
+      isSaving = false;
       setSyncStatus("error", "Erro ao salvar — tente novamente");
     }
   }
 
-  function forceSync() { syncFromSheets(); }
+  function forceSync() { isSaving = false; syncFromSheets(); }
 
   function setSyncStatus(state, msg) {
     document.getElementById('sync-dot').className = 'sync-dot ' + state;
