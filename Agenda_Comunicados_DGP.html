@@ -332,8 +332,15 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
 
   async function sheetAction(params) {
     if (!SCRIPT_URL) return;
-    const url = SCRIPT_URL + '?' + Object.entries(params).map(([k,v]) => k + '=' + encodeURIComponent(v)).join('&');
-    await fetch(url, { mode: "no-cors" });
+    const url = SCRIPT_URL + '?' + Object.entries(params).map(([k,v]) => k + '=' + encodeURIComponent(v)).join('&') + '&t=' + Date.now();
+    try {
+      await fetch(url);
+    } catch(e) {
+      console.error('sheetAction error', e);
+    }
+    // aguarda Google processar antes do próximo sync
+    await new Promise(r => setTimeout(r, 3000));
+    await syncFromSheets();
   }
 
   function forceSync() { syncFromSheets(); }
