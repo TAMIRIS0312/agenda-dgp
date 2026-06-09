@@ -321,7 +321,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
     try {
       const resp = await fetch(SCRIPT_URL + "?t=" + Date.now());
       const data = await resp.json();
-      const fresh = data.filter(r => r.id && r.date && r.title);
+      const fresh = data.filter(r => r.id && r.date && r.title).map(r => ({...r, id: String(r.id)}));
       if (fresh.length >= events.length) {
         events = fresh;
         render();
@@ -409,7 +409,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
       visEvs.slice(0,3).forEach(ev=>{
         const col=COLORS[ev.sup]||COLORS.Tamiris;
         h+=`<div class="event-pill" style="background:${col.bg};color:${col.text};border:1px solid ${col.border}"
-          onclick="event.stopPropagation();editEvent('${ev.id}')" title="${ev.sup}: ${escHtml(ev.title)}">
+          onclick="event.stopPropagation();editEvent('${String(ev.id)}')" title="${ev.sup}: ${escHtml(ev.title)}">
           <span class="pill-dot" style="background:${col.dot}"></span>${escHtml(ev.title)}</div>`;
       });
       if(visEvs.length>3) h+=`<div class="more-label">+${visEvs.length-3} mais</div>`;
@@ -460,7 +460,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
   function openModalOnDate(ds){ openModal(ds); }
 
   function editEvent(id){
-    const ev=events.find(e=>e.id===id); if(!ev) return;
+    const ev=events.find(e=>String(e.id)===String(id)); if(!ev) return;
     editingId=id;
     document.getElementById('modal-title').textContent='Editar postagem';
     document.getElementById('f-sup').value=ev.sup;
@@ -484,7 +484,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
     if(!title){ document.getElementById('f-title').focus(); return; }
     if(!date){  document.getElementById('f-date').focus();  return; }
     if(editingId){
-      const i=events.findIndex(e=>e.id===editingId);
+      const i=events.findIndex(e=>String(e.id)===String(editingId));
       if(i>-1) events[i]={id:editingId,sup,date,title,cat,obs};
     } else { events.push({id:Date.now().toString(),sup,date,title,cat,obs}); }
     closeModal(); render(); await persistToSheets();
@@ -492,7 +492,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
 
   async function deleteEvent(){
     if(!confirm('Excluir esta postagem?')) return;
-    events=events.filter(e=>e.id!==editingId);
+    events=events.filter(e=>String(e.id)!==String(editingId));
     closeModal(); render(); await persistToSheets();
   }
 
