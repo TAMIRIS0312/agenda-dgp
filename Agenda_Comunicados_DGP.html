@@ -313,19 +313,19 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
   }
 
   // ── GOOGLE SHEETS SYNC ────────────────────────────────────────
-  let isSaving = false;
+
+
+  let lastSaveTime = 0;
 
   async function syncFromSheets() {
-    if (!SCRIPT_URL || isSaving) return;
+    if (!SCRIPT_URL) return;
+    if (Date.now() - lastSaveTime < 8000) return;
     setSyncStatus("loading", "Sincronizando...");
     try {
       const resp = await fetch(SCRIPT_URL + "?t=" + Date.now());
       const data = await resp.json();
-      const fresh = data.filter(r => r.id && r.date && r.title).map(r => ({...r, id: String(r.id)}));
-      if (fresh.length >= events.length) {
-        events = fresh;
-        render();
-      }
+      events = data.filter(r => r.id && r.date && r.title).map(r => ({...r, id: String(r.id)}));
+      render();
       const t = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
       setSyncStatus("ok", "Sincronizado às " + t);
     } catch(e) {
@@ -335,7 +335,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
 
   async function persistToSheets() {
     if (!SCRIPT_URL) return;
-    isSaving = true;
+    lastSaveTime = Date.now();
     setSyncStatus("loading", "Salvando...");
     try {
       const snapshot = JSON.stringify(events);
@@ -344,14 +344,14 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
       await fetch(url, { mode: "no-cors" });
       const t = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
       setSyncStatus("ok", "Salvo às " + t);
-      setTimeout(() => { isSaving = false; }, 5000);
+
     } catch(e) {
-      isSaving = false;
+
       setSyncStatus("error", "Erro ao salvar — tente novamente");
     }
   }
 
-  function forceSync() { isSaving = false; syncFromSheets(); }
+  function forceSync() { lastSaveTime = 0; syncFromSheets(); }
 
   function setSyncStatus(state, msg) {
     document.getElementById('sync-dot').className = 'sync-dot ' + state;
