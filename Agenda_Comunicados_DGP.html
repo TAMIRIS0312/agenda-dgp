@@ -14,7 +14,6 @@
     --radius:10px; --radius-sm:6px;
   }
   body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
-
   .site-header { background:var(--en-blue); position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,58,112,0.25); }
   .header-inner { max-width:1100px; margin:0 auto; padding:0 1.5rem; display:flex; align-items:stretch; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
   .logo-block { display:flex; flex-direction:column; justify-content:center; padding:0.85rem 1.25rem 0.85rem 0; border-right:1px solid rgba(255,255,255,0.12); }
@@ -28,7 +27,6 @@
   .month-label { font-size:13px; font-weight:600; color:#fff; min-width:150px; text-align:center; }
   .nav-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:var(--radius-sm); color:#fff; width:30px; height:30px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; transition:background .15s; }
   .nav-btn:hover { background:rgba(255,255,255,0.22); }
-
   .toolbar-wrap { background:var(--en-blue-light); border-bottom:1px solid var(--border); }
   .toolbar { max-width:1100px; margin:0 auto; padding:0.6rem 1.5rem; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
   .toolbar-label { font-size:11px; color:var(--text-muted); font-weight:500; margin-right:2px; }
@@ -37,18 +35,14 @@
   .filter-btn.active { background:var(--en-blue); border-color:var(--en-blue); color:#fff; font-weight:600; }
   .add-btn { margin-left:auto; background:var(--en-orange); color:#fff; border:none; border-radius:var(--radius-sm); padding:6px 16px; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .15s; }
   .add-btn:hover { background:var(--en-orange-hover); }
-
   .main { max-width:1100px; margin:0 auto; padding:1.25rem 1.5rem 2rem; }
-
   .summary-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1rem; }
   .summary-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 14px; display:flex; flex-direction:column; align-items:center; min-width:78px; }
   .summary-num { font-size:20px; font-weight:700; color:var(--en-blue); line-height:1; }
   .summary-lbl { font-size:10px; color:var(--text-muted); margin-top:2px; text-align:center; }
   .summary-card.conflict .summary-num { color:var(--danger); }
-
   .conflict-alert { background:var(--danger-bg); border:1px solid var(--danger-border); border-radius:var(--radius-sm); padding:8px 14px; font-size:12px; color:#8B1A1A; margin-bottom:1rem; display:none; align-items:center; gap:8px; }
   .conflict-alert.show { display:flex; }
-
   .sync-status { display:flex; align-items:center; gap:8px; margin-bottom:0.75rem; font-size:11px; color:var(--text-muted); }
   .sync-dot { width:8px; height:8px; border-radius:50%; background:#ccc; flex-shrink:0; transition:background .3s; }
   .sync-dot.ok { background:#1D9E75; }
@@ -57,7 +51,6 @@
   @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
   .sync-refresh { margin-left:auto; background:transparent; border:1px solid var(--border); border-radius:4px; padding:2px 8px; font-size:10px; cursor:pointer; font-family:inherit; color:var(--text-muted); }
   .sync-refresh:hover { border-color:var(--en-blue); color:var(--en-blue); }
-
   .calendar-wrap { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:0 2px 8px rgba(0,58,112,0.06); }
   .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); }
   .day-header { background:var(--en-blue); color:rgba(255,255,255,0.9); font-size:11px; font-weight:600; text-align:center; padding:8px 4px; border-right:1px solid rgba(255,255,255,0.1); letter-spacing:0.5px; }
@@ -77,24 +70,9 @@
   .more-label { font-size:10px; color:var(--text-light); padding:0 3px; }
   .add-day-btn { position:absolute; bottom:4px; right:4px; width:18px; height:18px; border:1px solid var(--border); border-radius:50%; background:transparent; cursor:pointer; display:none; align-items:center; justify-content:center; font-size:14px; color:var(--text-muted); line-height:1; font-family:inherit; }
   .day-cell:hover .add-day-btn { display:flex; }
-
   .legend { background:var(--en-blue-light); border-top:1px solid var(--border); padding:8px 14px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
   .legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted); font-weight:500; }
   .legend-dot { width:10px; height:10px; border-radius:50%; }
-
-  /* SETUP BANNER */
-  .setup-banner { background:#fff8e1; border:1px solid #ffc107; border-radius:var(--radius-sm); padding:1rem 1.25rem; margin-bottom:1rem; display:none; }
-  .setup-banner.show { display:block; }
-  .setup-title { font-size:13px; font-weight:700; color:#7a5c00; margin-bottom:0.5rem; }
-  .setup-body { font-size:12px; color:#7a5c00; line-height:1.7; }
-  .setup-body code { background:rgba(0,0,0,0.07); padding:1px 5px; border-radius:3px; font-family:monospace; font-size:11px; }
-  .setup-input-row { display:flex; gap:8px; margin-top:0.75rem; flex-wrap:wrap; }
-  .setup-input { flex:1; min-width:200px; padding:7px 10px; font-size:12px; border:1px solid #ffc107; border-radius:var(--radius-sm); font-family:inherit; background:#fffde7; color:var(--text); }
-  .setup-input:focus { outline:none; border-color:#f47920; }
-  .setup-save-btn { background:var(--en-orange); color:#fff; border:none; border-radius:var(--radius-sm); padding:7px 16px; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; }
-  .setup-save-btn:hover { background:var(--en-orange-hover); }
-
-  /* MODAL */
   .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,30,60,0.45); z-index:1000; align-items:center; justify-content:center; padding:1rem; }
   .modal-overlay.open { display:flex; }
   .modal { background:var(--card); border-radius:var(--radius); width:100%; max-width:390px; box-shadow:0 16px 48px rgba(0,30,60,0.22); overflow:hidden; }
@@ -116,17 +94,12 @@
   .btn-ghost:hover { border-color:var(--text-muted); color:var(--text); }
   .btn-danger { background:transparent; border:1px solid var(--danger); color:var(--danger); margin-right:auto; }
   .btn-danger:hover { background:var(--danger-bg); }
-
   .site-footer { text-align:center; padding:1rem; font-size:10px; color:var(--text-light); border-top:1px solid var(--border); margin-top:0.5rem; }
   .footer-bar { width:40px; height:3px; background:var(--en-orange); border-radius:2px; margin:0 auto 6px; }
-
   @media(max-width:680px){
-    .header-inner{padding:0 1rem;}
-    .header-nav{width:100%;justify-content:center;padding-top:0;padding-bottom:0.6rem;}
-    .toolbar{padding:0.5rem 1rem;}
-    .main{padding:0.75rem 1rem 2rem;}
-    .day-cell{min-height:64px;}
-    .event-pill{font-size:9px;}
+    .header-inner{padding:0 1rem;} .header-nav{width:100%;justify-content:center;padding-top:0;padding-bottom:0.6rem;}
+    .toolbar{padding:0.5rem 1rem;} .main{padding:0.75rem 1rem 2rem;}
+    .day-cell{min-height:64px;} .event-pill{font-size:9px;}
   }
 </style>
 </head>
@@ -165,37 +138,13 @@
 </div>
 
 <main class="main">
-
-  <!-- BANNER DE CONFIGURAÇÃO -->
-  <div class="setup-banner" id="setup-banner">
-    <div class="setup-title">⚙️ Configuração inicial — faça isso uma única vez</div>
-    <div class="setup-body">
-      Para que todas as colegas vejam e editem o mesmo calendário, siga os passos abaixo:<br><br>
-      <strong>1.</strong> Acesse <a href="https://sheets.new" target="_blank" style="color:#003A70">sheets.new</a> e crie uma planilha Google Sheets<br>
-      <strong>2.</strong> Renomeie a aba para <code>agenda</code><br>
-      <strong>3.</strong> Na linha 1, coloque os cabeçalhos: <code>id</code> | <code>sup</code> | <code>date</code> | <code>title</code> | <code>cat</code> | <code>obs</code><br>
-      <strong>4.</strong> Clique em <strong>Extensões → Apps Script</strong>, cole o código abaixo e clique em <strong>Implantar → Novo</strong> (tipo: Web app, acesso: Qualquer pessoa):<br><br>
-      <code id="apps-script-code">
-function doGet(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByName('agenda');var data=sheet.getDataRange().getValues();var keys=data[0];var rows=data.slice(1).map(function(r){var o={};keys.forEach(function(k,i){o[k]=r[i]});return o});return ContentService.createTextOutput(JSON.stringify(rows)).setMimeType(ContentService.MimeType.JSON);}
-function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByName('agenda');var payload=JSON.parse(e.postData.contents);if(payload.action==='save'){sheet.clearContents();sheet.appendRow(['id','sup','date','title','cat','obs']);payload.events.forEach(function(ev){sheet.appendRow([ev.id,ev.sup,ev.date,ev.title,ev.cat,ev.obs||''])});}return ContentService.createTextOutput('ok');}
-      </code><br><br>
-      <strong>5.</strong> Copie a URL gerada e cole abaixo:
-    </div>
-    <div class="setup-input-row">
-      <input class="setup-input" type="text" id="script-url-input" placeholder="https://script.google.com/macros/s/...../exec">
-      <button class="setup-save-btn" onclick="saveScriptUrl()">Salvar e conectar</button>
-    </div>
-  </div>
-
   <div class="summary-bar" id="summary-bar"></div>
   <div class="conflict-alert" id="conflict-alert">⚠️ <span id="conflict-text"></span></div>
-
   <div class="sync-status">
     <div class="sync-dot loading" id="sync-dot"></div>
     <span id="sync-text">Conectando...</span>
     <button class="sync-refresh" onclick="forceSync()">↻ Atualizar</button>
   </div>
-
   <div class="calendar-wrap">
     <div class="cal-grid" id="calendar">
       <div class="day-header">Dom</div><div class="day-header">Seg</div>
@@ -209,9 +158,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
       <div class="legend-item"><div class="legend-dot" style="background:#F47920"></div>Juliana</div>
       <div class="legend-item"><div class="legend-dot" style="background:#BA7517"></div>Camila</div>
       <div class="legend-item"><div class="legend-dot" style="background:#D4537E"></div>Andréia</div>
-      <div class="legend-item" style="margin-left:8px">
-        <div class="legend-dot" style="background:#E24B4A;border-radius:3px"></div>Conflito de data
-      </div>
+      <div class="legend-item" style="margin-left:8px"><div class="legend-dot" style="background:#E24B4A;border-radius:3px"></div>Conflito de data</div>
     </div>
   </div>
 </main>
@@ -221,7 +168,6 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
   Expresso Nepomuceno · Diretoria de Gestão de Pessoas
 </footer>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
     <div class="modal-header">
@@ -270,9 +216,9 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
 </div>
 
 <script>
-  // ── CONFIGURAÇÃO ──────────────────────────────────────────────
-  const STORAGE_KEY_URL = 'dgp_script_url';
-  let SCRIPT_URL = localStorage.getItem(STORAGE_KEY_URL) || 'https://script.google.com/macros/s/AKfycbyBznYP9-mgIt0d8F5Yio2AfEr8U8ISs-j-ftbt8-613SZbgEUd48l9CamU6CzCnGJd9Q/exec';
+  const API_KEY  = '$2a$10$v0J5DZQLQSWZIColvg9RPuiWbfYcKAtJQVvRI9DZXwDF9Ztfx8LEC';
+  const BIN_URL  = 'https://api.jsonbin.io/v3/b';
+  let   BIN_ID   = localStorage.getItem('dgp_bin_id') || '';
 
   const COLORS = {
     Tamiris: {bg:'#E6EEF5',border:'#003A70',text:'#003A70',dot:'#003A70'},
@@ -286,158 +232,122 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
   let activeFilter = 'all';
   let editingId = null;
   let events = [];
-  let syncInterval = null;
 
-  // ── SETUP ─────────────────────────────────────────────────────
-  function checkSetup() {
-    if (!SCRIPT_URL) {
-      document.getElementById('setup-banner').classList.add('show');
-      setSyncStatus('error', 'Configuração necessária — veja as instruções acima');
-    } else {
-      document.getElementById('setup-banner').classList.remove('show');
-      syncFromSheets();
-      if (syncInterval) clearInterval(syncInterval);
-      syncInterval = setInterval(syncFromSheets, 20000);
-    }
-  }
-
-  function saveScriptUrl() {
-    const url = document.getElementById('script-url-input').value.trim();
-    if (!url.startsWith('https://script.google.com')) {
-      alert('URL inválida. Cole a URL gerada pelo Google Apps Script.');
-      return;
-    }
-    SCRIPT_URL = url;
-    localStorage.setItem(STORAGE_KEY_URL, url);
-    checkSetup();
-  }
-
-  // ── GOOGLE SHEETS SYNC ────────────────────────────────────────
-
-
-  async function syncFromSheets() {
-    if (!SCRIPT_URL) return;
-    setSyncStatus("loading", "Sincronizando...");
+  // ── JSONBIN ───────────────────────────────────────────────────
+  async function initBin() {
+    if (BIN_ID) { await syncFromBin(); return; }
+    setSyncStatus('loading', 'Criando armazenamento...');
     try {
-      const resp = await fetch(SCRIPT_URL + "?t=" + Date.now());
-      const data = await resp.json();
-      events = data.filter(r => r.id && r.date && r.title).map(r => ({...r, id: String(r.id)}));
+      const r = await fetch(BIN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'X-Master-Key': API_KEY, 'X-Bin-Name':'agenda-dgp' },
+        body: JSON.stringify({ events: [] })
+      });
+      const d = await r.json();
+      BIN_ID = d.metadata.id;
+      localStorage.setItem('dgp_bin_id', BIN_ID);
+      setSyncStatus('ok', 'Pronto');
       render();
-      const t = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
-      setSyncStatus("ok", "Sincronizado às " + t);
-    } catch(e) {
-      setSyncStatus("error", "Erro ao sincronizar — clique em Atualizar");
-    }
+    } catch(e) { setSyncStatus('error', 'Erro ao iniciar — recarregue a página'); }
   }
 
-  async function sheetAction(params) {
-    if (!SCRIPT_URL) return;
-    const url = SCRIPT_URL + '?' + Object.entries(params).map(([k,v]) => k + '=' + encodeURIComponent(v)).join('&') + '&t=' + Date.now();
+  async function syncFromBin() {
+    if (!BIN_ID) return;
+    setSyncStatus('loading', 'Sincronizando...');
     try {
-      await fetch(url);
-    } catch(e) {
-      console.error('sheetAction error', e);
-    }
-    // aguarda Google processar antes do próximo sync
-    await new Promise(r => setTimeout(r, 3000));
-    await syncFromSheets();
+      const r = await fetch(`${BIN_URL}/${BIN_ID}/latest`, {
+        headers: { 'X-Master-Key': API_KEY }
+      });
+      const d = await r.json();
+      events = (d.record.events || []).map(e => ({...e, id: String(e.id)}));
+      render();
+      const t = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+      setSyncStatus('ok', 'Sincronizado às ' + t);
+    } catch(e) { setSyncStatus('error', 'Erro ao sincronizar'); }
   }
 
-  function forceSync() { syncFromSheets(); }
-
-  function setSyncStatus(state, msg) {
-    document.getElementById('sync-dot').className = 'sync-dot ' + state;
-    document.getElementById('sync-text').textContent = msg;
+  async function saveToBin() {
+    if (!BIN_ID) return;
+    setSyncStatus('loading', 'Salvando...');
+    try {
+      await fetch(`${BIN_URL}/${BIN_ID}`, {
+        method: 'PUT',
+        headers: { 'Content-Type':'application/json', 'X-Master-Key': API_KEY },
+        body: JSON.stringify({ events })
+      });
+      const t = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+      setSyncStatus('ok', 'Salvo às ' + t);
+    } catch(e) { setSyncStatus('error', 'Erro ao salvar — tente novamente'); }
   }
 
-  // ── FILTRO / NAVEGAÇÃO ────────────────────────────────────────
-  function setFilter(f, btn) {
-    activeFilter = f;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    render();
+  function forceSync() { syncFromBin(); }
+  function setSyncStatus(s,m) {
+    document.getElementById('sync-dot').className='sync-dot '+s;
+    document.getElementById('sync-text').textContent=m;
+  }
+
+  // ── FILTRO / NAV ──────────────────────────────────────────────
+  function setFilter(f,btn) {
+    activeFilter=f;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); render();
   }
   function changeMonth(dir) {
-    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + dir, 1);
-    render();
+    currentDate=new Date(currentDate.getFullYear(),currentDate.getMonth()+dir,1); render();
   }
 
   // ── RENDER ────────────────────────────────────────────────────
   function render() {
-    const y = currentDate.getFullYear(), m = currentDate.getMonth();
-    document.getElementById('month-label').textContent =
+    const y=currentDate.getFullYear(), m=currentDate.getMonth();
+    document.getElementById('month-label').textContent=
       new Date(y,m,1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).replace(/^\w/,c=>c.toUpperCase());
-
-    const cal = document.getElementById('calendar');
-    Array.from(cal.children).slice(7).forEach(e => e.remove());
-
-    const firstDay = new Date(y,m,1).getDay();
-    const daysInMonth = new Date(y,m+1,0).getDate();
-    const today = new Date();
-    const monthEvs = events.filter(e => { const d=new Date(e.date+'T12:00'); return d.getFullYear()===y && d.getMonth()===m; });
-    const byDay = {};
-    monthEvs.forEach(e => { byDay[e.date]=byDay[e.date]||[]; byDay[e.date].push(e); });
-
-    const prevDays = new Date(y,m,0).getDate();
-    for (let i=firstDay-1; i>=0; i--) {
-      const c=document.createElement('div'); c.className='day-cell other-month';
-      c.innerHTML=`<div class="day-num">${prevDays-i}</div>`; cal.appendChild(c);
-    }
-
-    for (let d=1; d<=daysInMonth; d++) {
+    const cal=document.getElementById('calendar');
+    Array.from(cal.children).slice(7).forEach(e=>e.remove());
+    const firstDay=new Date(y,m,1).getDay(), daysInMonth=new Date(y,m+1,0).getDate(), today=new Date();
+    const monthEvs=events.filter(e=>{const d=new Date(e.date+'T12:00');return d.getFullYear()===y&&d.getMonth()===m;});
+    const byDay={};
+    monthEvs.forEach(e=>{byDay[e.date]=byDay[e.date]||[];byDay[e.date].push(e);});
+    const prevDays=new Date(y,m,0).getDate();
+    for(let i=firstDay-1;i>=0;i--){const c=document.createElement('div');c.className='day-cell other-month';c.innerHTML=`<div class="day-num">${prevDays-i}</div>`;cal.appendChild(c);}
+    for(let d=1;d<=daysInMonth;d++){
       const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const dayEvs=byDay[ds]||[];
-      const visEvs=activeFilter==='all'?dayEvs:dayEvs.filter(e=>e.sup===activeFilter);
-      const sups=[...new Set(dayEvs.map(e=>e.sup))];
-      const conflict=sups.length>1;
+      const dayEvs=byDay[ds]||[], visEvs=activeFilter==='all'?dayEvs:dayEvs.filter(e=>e.sup===activeFilter);
+      const sups=[...new Set(dayEvs.map(e=>e.sup))], conflict=sups.length>1;
       const isToday=today.getFullYear()===y&&today.getMonth()===m&&today.getDate()===d;
-
       const c=document.createElement('div');
       c.className='day-cell'+(isToday?' today':'')+(conflict?' has-conflict':'');
       c.onclick=()=>openModalOnDate(ds);
-
       let h=`<div class="day-num">${d}</div>`;
       if(conflict&&activeFilter==='all') h+=`<div class="conflict-badge">${sups.length}</div>`;
       visEvs.slice(0,3).forEach(ev=>{
         const col=COLORS[ev.sup]||COLORS.Tamiris;
-        h+=`<div class="event-pill" style="background:${col.bg};color:${col.text};border:1px solid ${col.border}"
-          onclick="event.stopPropagation();editEvent('${String(ev.id)}')" title="${ev.sup}: ${escHtml(ev.title)}">
-          <span class="pill-dot" style="background:${col.dot}"></span>${escHtml(ev.title)}</div>`;
+        h+=`<div class="event-pill" style="background:${col.bg};color:${col.text};border:1px solid ${col.border}" onclick="event.stopPropagation();editEvent('${String(ev.id)}')" title="${ev.sup}: ${escHtml(ev.title)}"><span class="pill-dot" style="background:${col.dot}"></span>${escHtml(ev.title)}</div>`;
       });
       if(visEvs.length>3) h+=`<div class="more-label">+${visEvs.length-3} mais</div>`;
       h+=`<button class="add-day-btn" onclick="event.stopPropagation();openModalOnDate('${ds}')">+</button>`;
       c.innerHTML=h; cal.appendChild(c);
     }
-
-    const total=firstDay+daysInMonth;
-    const rem=total<=35?35-total:42-total;
-    for(let i=1;i<=rem;i++){
-      const c=document.createElement('div'); c.className='day-cell other-month';
-      c.innerHTML=`<div class="day-num">${i}</div>`; cal.appendChild(c);
-    }
-
-    renderSummary(monthEvs, byDay);
+    const total=firstDay+daysInMonth, rem=total<=35?35-total:42-total;
+    for(let i=1;i<=rem;i++){const c=document.createElement('div');c.className='day-cell other-month';c.innerHTML=`<div class="day-num">${i}</div>`;cal.appendChild(c);}
+    renderSummary(monthEvs,byDay);
   }
 
-  function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-  function renderSummary(monthEvs, byDay) {
-    const conflictDays=Object.values(byDay).filter(v=>[...new Set(v.map(e=>e.sup))].length>1).length;
+  function renderSummary(monthEvs,byDay){
+    const cd=Object.values(byDay).filter(v=>[...new Set(v.map(e=>e.sup))].length>1).length;
     const people=['Tamiris','Hérica','Juliana','Camila','Andréia'];
     document.getElementById('summary-bar').innerHTML=
       `<div class="summary-card"><div class="summary-num">${monthEvs.length}</div><div class="summary-lbl">postagens no mês</div></div>`+
       people.map(n=>`<div class="summary-card"><div class="summary-num" style="color:${COLORS[n].dot}">${monthEvs.filter(e=>e.sup===n).length}</div><div class="summary-lbl">${n}</div></div>`).join('')+
-      `<div class="summary-card${conflictDays>0?' conflict':''}"><div class="summary-num">${conflictDays}</div><div class="summary-lbl">conflito${conflictDays!==1?'s':''}</div></div>`;
-
+      `<div class="summary-card${cd>0?' conflict':''}"><div class="summary-num">${cd}</div><div class="summary-lbl">conflito${cd!==1?'s':''}</div></div>`;
     const alert=document.getElementById('conflict-alert');
-    if(conflictDays>0){
-      alert.classList.add('show');
-      document.getElementById('conflict-text').textContent=`${conflictDays} dia(s) com postagens simultâneas — considere redistribuir as datas para aumentar o alcance dos comunicados.`;
-    } else { alert.classList.remove('show'); }
+    if(cd>0){alert.classList.add('show');document.getElementById('conflict-text').textContent=`${cd} dia(s) com postagens simultâneas — considere redistribuir as datas.`;}
+    else alert.classList.remove('show');
   }
 
   // ── MODAL ─────────────────────────────────────────────────────
-  function openModal(ds) {
+  function openModal(ds){
     editingId=null;
     document.getElementById('modal-title').textContent='Nova postagem';
     document.getElementById('f-sup').value='Tamiris';
@@ -449,8 +359,7 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
     document.getElementById('modal-overlay').classList.add('open');
     setTimeout(()=>document.getElementById('f-title').focus(),100);
   }
-  function openModalOnDate(ds){ openModal(ds); }
-
+  function openModalOnDate(ds){openModal(ds);}
   function editEvent(id){
     const ev=events.find(e=>String(e.id)===String(id)); if(!ev) return;
     editingId=id;
@@ -463,9 +372,9 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
     document.getElementById('btn-del').style.display='block';
     document.getElementById('modal-overlay').classList.add('open');
   }
-  function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); editingId=null; }
-  document.getElementById('modal-overlay').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+  function closeModal(){document.getElementById('modal-overlay').classList.remove('open');editingId=null;}
+  document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
   async function saveEvent(){
     const sup=document.getElementById('f-sup').value;
@@ -473,32 +382,27 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
     const title=document.getElementById('f-title').value.trim();
     const cat=document.getElementById('f-cat').value;
     const obs=document.getElementById('f-obs').value.trim();
-    if(!title){ document.getElementById('f-title').focus(); return; }
-    if(!date){  document.getElementById('f-date').focus();  return; }
+    if(!title){document.getElementById('f-title').focus();return;}
+    if(!date){document.getElementById('f-date').focus();return;}
     if(editingId){
       const i=events.findIndex(e=>String(e.id)===String(editingId));
       if(i>-1) events[i]={id:editingId,sup,date,title,cat,obs};
-      closeModal(); render();
-      await sheetAction({action:'update', data: JSON.stringify(events[i])});
     } else {
-      const newEv={id:Date.now().toString(),sup,date,title,cat,obs};
-      events.push(newEv);
-      closeModal(); render();
-      await sheetAction({action:'add', data: JSON.stringify(newEv)});
+      events.push({id:Date.now().toString(),sup,date,title,cat,obs});
     }
+    closeModal(); render(); await saveToBin();
   }
 
   async function deleteEvent(){
     if(!confirm('Excluir esta postagem?')) return;
-    const delId = editingId;
-    events=events.filter(e=>String(e.id)!==String(delId));
-    closeModal(); render();
-    await sheetAction({action:'delete', id: delId});
+    events=events.filter(e=>String(e.id)!==String(editingId));
+    closeModal(); render(); await saveToBin();
   }
 
   // ── INIT ──────────────────────────────────────────────────────
   render();
-  checkSetup();
+  initBin();
+  setInterval(syncFromBin, 20000);
 </script>
 </body>
 </html>
