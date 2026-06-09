@@ -315,11 +315,8 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
   // ── GOOGLE SHEETS SYNC ────────────────────────────────────────
 
 
-  let lastSaveTime = 0;
-
   async function syncFromSheets() {
     if (!SCRIPT_URL) return;
-    if (Date.now() - lastSaveTime < 8000) return;
     setSyncStatus("loading", "Sincronizando...");
     try {
       const resp = await fetch(SCRIPT_URL + "?t=" + Date.now());
@@ -333,25 +330,13 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
     }
   }
 
-  async function persistToSheets() {
+  async function sheetAction(params) {
     if (!SCRIPT_URL) return;
-    lastSaveTime = Date.now();
-    setSyncStatus("loading", "Salvando...");
-    try {
-      const snapshot = JSON.stringify(events);
-      const encoded = encodeURIComponent(snapshot);
-      const url = SCRIPT_URL + "?action=save&data=" + encoded;
-      await fetch(url, { mode: "no-cors" });
-      const t = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
-      setSyncStatus("ok", "Salvo às " + t);
-
-    } catch(e) {
-
-      setSyncStatus("error", "Erro ao salvar — tente novamente");
-    }
+    const url = SCRIPT_URL + '?' + Object.entries(params).map(([k,v]) => k + '=' + encodeURIComponent(v)).join('&');
+    await fetch(url, { mode: "no-cors" });
   }
 
-  function forceSync() { lastSaveTime = 0; syncFromSheets(); }
+  function forceSync() { syncFromSheets(); }
 
   function setSyncStatus(state, msg) {
     document.getElementById('sync-dot').className = 'sync-dot ' + state;
@@ -486,14 +471,22 @@ function doPost(e){var sheet=SpreadsheetApp.getActiveSpreadsheet().getSheetByNam
     if(editingId){
       const i=events.findIndex(e=>String(e.id)===String(editingId));
       if(i>-1) events[i]={id:editingId,sup,date,title,cat,obs};
-    } else { events.push({id:Date.now().toString(),sup,date,title,cat,obs}); }
-    closeModal(); render(); await persistToSheets();
+      closeModal(); render();
+      await sheetAction({action:'update', data: JSON.stringify(events[i])});
+    } else {
+      const newEv={id:Date.now().toString(),sup,date,title,cat,obs};
+      events.push(newEv);
+      closeModal(); render();
+      await sheetAction({action:'add', data: JSON.stringify(newEv)});
+    }
   }
 
   async function deleteEvent(){
     if(!confirm('Excluir esta postagem?')) return;
-    events=events.filter(e=>String(e.id)!==String(editingId));
-    closeModal(); render(); await persistToSheets();
+    const delId = editingId;
+    events=events.filter(e=>String(e.id)!==String(delId));
+    closeModal(); render();
+    await sheetAction({action:'delete', id: delId});
   }
 
   // ── INIT ──────────────────────────────────────────────────────
