@@ -218,7 +218,7 @@
 <script>
   const API_KEY  = '$2a$10$v0J5DZQLQSWZIColvg9RPuiWbfYcKAtJQVvRI9DZXwDF9Ztfx8LEC';
   const BIN_URL  = 'https://api.jsonbin.io/v3/b';
-  let   BIN_ID   = localStorage.getItem('dgp_bin_id') || '';
+  const BIN_ID   = '6a28a418f5f4af5e29d50865';
 
   const COLORS = {
     Tamiris: {bg:'#E6EEF5',border:'#003A70',text:'#003A70',dot:'#003A70'},
@@ -235,20 +235,7 @@
 
   // ── JSONBIN ───────────────────────────────────────────────────
   async function initBin() {
-    if (BIN_ID) { await syncFromBin(); return; }
-    setSyncStatus('loading', 'Criando armazenamento...');
-    try {
-      const r = await fetch(BIN_URL, {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json', 'X-Master-Key': API_KEY, 'X-Bin-Name':'agenda-dgp' },
-        body: JSON.stringify({ events: [] })
-      });
-      const d = await r.json();
-      BIN_ID = d.metadata.id;
-      localStorage.setItem('dgp_bin_id', BIN_ID);
-      setSyncStatus('ok', 'Pronto');
-      render();
-    } catch(e) { setSyncStatus('error', 'Erro ao iniciar — recarregue a página'); }
+    await syncFromBin();
   }
 
   async function syncFromBin() {
